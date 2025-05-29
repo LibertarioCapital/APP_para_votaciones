@@ -1,0 +1,62 @@
+<!-- templates/gallery.html -->
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <h1>Galería de Imágenes</h1>
+    {% if images %}
+        <div class="gallery-reel">
+            {% for image in images %}
+            <div class="gallery-thumbnail-container" data-filename="{{ image.filename }}"> <!-- Añadir data-filename aquí también -->
+                <img src="{{ url_for('serve_image', filename=image.filename) }}"
+                     alt="{{ image.tag if image.tag else image.original_filename }}"
+                     class="gallery-thumbnail"
+                     data-original-filename="{{ image.original_filename }}"
+                     data-tag="{{ image.tag }}"
+                     data-timestamp="{{ image.timestamp }}">
+                <!-- Opcional: Botón de eliminar en el reel
+                <button class="btn-delete-gallery-item" data-filename="{{ image.filename }}" title="Eliminar imagen del reel">×</button>
+                -->
+            </div>
+            {% endfor %}
+        </div>
+
+        <hr>
+        <h2>Vista Detallada</h2>
+        <div class="gallery-grid">
+            {% for image in images %}
+            <div class="gallery-item" data-filename="{{ image.filename }}"> <!-- Identificador para el item completo -->
+                <img src="{{ url_for('serve_image', filename=image.filename) }}"
+                     alt="{{ image.tag if image.tag else image.original_filename }}"
+                     class="gallery-image-large-trigger"
+                     data-original-filename="{{ image.original_filename }}"
+                     data-tag="{{ image.tag }}"
+                     data-timestamp="{{ image.timestamp }}">
+                <div class="image-info">
+                    <p><strong>Nombre:</strong> {{ image.original_filename }}</p>
+                    {% if image.tag %}<p><strong>Tag:</strong> {{ image.tag }}</p>{% endif %}
+                    <p><strong>Subido:</strong> {{ image.timestamp }}</p>
+                </div>
+                <button class="btn-delete-gallery-item" data-filename="{{ image.filename }}" title="Eliminar esta imagen">
+                    Eliminar <span class="delete-icon">×</span> <!-- Icono simple -->
+                </button>
+            </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p>No hay imágenes en la galería. ¡Sube algunas!</p>
+    {% endif %}
+</div>
+
+<!-- Modal de confirmación de eliminación (opcional, podrías usar window.confirm) -->
+<div id="deleteConfirmModal" class="modal" style="display: none; background-color: rgba(0,0,0,0.7);">
+    <div class="modal-dialog" style="background-color: #fff; padding: 20px; border-radius: 5px; width: 350px; margin: 15% auto; text-align: center;">
+        <h4>Confirmar Eliminación</h4>
+        <p>¿Estás seguro de que quieres eliminar esta imagen permanentemente?</p>
+        <p><strong><span id="deleteConfirmFilename"></span></strong></p>
+        <button id="confirmDeleteBtn" class="btn-danger" style="margin-right: 10px;">Sí, Eliminar</button>
+        <button id="cancelDeleteBtn" class="btn-secondary">Cancelar</button>
+    </div>
+</div>
+
+{% endblock %}

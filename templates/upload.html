@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <h1>Subir Imágenes </h1>
+    <p>App DEMO</p>
+    <p> Para respaldo elecciones Municipales /Presidenciales 2025</p>
+    <p>Selecciona las imágenes que deseas subir. Puedes seleccionar múltiples imágenes a la vez.</p>
+    <form id="uploadForm" enctype="multipart/form-data">
+        <div class="form-group">
+            <label for="fileInput">Seleccionar imágenes:</label>
+            <input type="file" id="fileInput" accept="image/*" multiple>
+        </div>
+
+        <div id="previewContainer" class="preview-container">
+            <!-- Las previsualizaciones se insertarán aquí por JavaScript -->
+        </div>
+
+        <button type="submit" class="btn-upload">Subir Imágenes Seleccionadas</button>
+    </form>
+    <div id="uploadStatus" class="upload-status"></div>
+</div>
+{% endblock %}

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visor de Imágenes</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    
+</head>
+<body>
+    <nav>
+        <ul>
+            <li class="{{ 'active' if active_tab == 'upload' else '' }}">
+                <a href="{{ url_for('upload_page') }}">Subir Imágenes</a>
+            </li>
+            <li class="{{ 'active' if active_tab == 'gallery' else '' }}">
+                <a href="{{ url_for('gallery_page') }}">Galería</a>
+            </li>
+
+            <li class="{{ 'active' if active_tab == 'about' else '' }}">
+                <a href="{{ url_for('about_page') }}">Acerca de</a>
+            </li>
+        </ul>
+    </nav>
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+    
+<!-- Modal para imagen grande -->
+    <div id="imageModal" class="modal">
+        <span class="close-modal-btn">×</span>
+        <div class="modal-content-wrapper">
+            <img class="modal-content" id="modalImage">
+            <div id="caption"></div>
+        </div>
+        <!-- Botones de Navegación del Modal -->
+        <a class="prev-btn">❮</a>
+        <a class="next-btn">❯</a>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,101 @@
+/* ... (tus estilos existentes) ... */
+
+/* --- Estilos para Botón de Eliminar en Galería --- */
+.gallery-item {
+    position: relative; /* Para posicionar el botón de eliminar dentro */
+    /* ... otros estilos ... */
+}
+
+.btn-delete-gallery-item {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: rgba(220, 53, 69, 0.8); /* Rojo semi-transparente */
+    color: white;
+    border: none;
+    border-radius: var(--border-radius);
+    padding: 6px 10px;
+    font-size: 0.85rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color var(--transition-speed), transform var(--transition-speed);
+    z-index: 10; /* Asegurar que está por encima de la imagen */
+    opacity: 0; /* Oculto por defecto */
+    transform: translateY(-5px); /* Ligeramente arriba */
+}
+
+.gallery-item:hover .btn-delete-gallery-item {
+    opacity: 1; /* Mostrar al pasar el ratón sobre el item */
+    transform: translateY(0);
+}
+
+.btn-delete-gallery-item:hover {
+    background-color: var(--danger-color); /* Rojo sólido */
+    transform: scale(1.05);
+}
+
+.btn-delete-gallery-item .delete-icon {
+    font-size: 1.1em;
+    line-height: 1;
+    margin-left: 5px;
+}
+
+/* Estilos para el modal de confirmación si lo usas */
+/* (El HTML ya tiene estilos inline, pero aquí podrías centralizarlos) */
+.modal-dialog { /* Estilo para el contenido del modal de confirmación */
+    background-color: #fff;
+    padding: 25px;
+    border-radius: var(--border-radius);
+    width: 90%;
+    max-width: 400px;
+    margin: 15vh auto; /* Centrado vertical aproximado */
+    text-align: center;
+    box-shadow: var(--box-shadow);
+}
+.modal-dialog h4 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    color: var(--dark-color);
+}
+.modal-dialog p {
+    margin-bottom: 20px;
+    color: var(--secondary-color);
+}
+.modal-dialog button {
+    padding: 10px 20px;
+    border-radius: var(--border-radius);
+    border: none;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background-color var(--transition-speed);
+}
+.modal-dialog .btn-danger {
+    background-color: var(--danger-color);
+    color: white;
+    margin-right: 10px;
+}
+.modal-dialog .btn-danger:hover {
+    background-color: #c82333;
+}
+.modal-dialog .btn-secondary {
+    background-color: var(--secondary-color);
+    color: white;
+}
+.modal-dialog .btn-secondary:hover {
+    background-color: #545b62;
+}
+
+/* Si el botón de eliminar está en el reel (opcional) */
+.gallery-thumbnail-container {
+    position: relative;
+}
+.gallery-thumbnail-container .btn-delete-gallery-item {
+    /* Ajusta posición y tamaño si es necesario para el reel */
+    top: 5px;
+    right: 5px;
+    padding: 4px 8px;
+    font-size: 0.75rem;
+}
+.gallery-thumbnail-container:hover .btn-delete-gallery-item {
+    opacity: 1;
+}
